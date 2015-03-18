@@ -1,0 +1,153 @@
+\documentclass[10pt, compress]{beamer}
+
+\usetheme{m}
+
+\usepackage{booktabs}
+\usepackage[scale=2]{ccicons}
+\usepackage{minted}
+\usepackage{graphicx}
+
+
+\usepgfplotslibrary{dateplot}
+
+\usemintedstyle{trac}
+\graphicspath{ {images/} }
+\DeclareGraphicsExtensions{.pdf,.png,.jpg}
+ 
+\title{Ansible and Cumulus Linux}
+\subtitle{}
+\date{\today}
+\author{Dominik Bay}
+\institute{rrbone, Dortmund \& grandcentrix, Cologne}
+
+\begin{document}
+
+\maketitle
+
+\begin{frame}[fragile]
+  \frametitle{Ansible and Cumulus Linux}
+
+  The combination of Ansible and Cumulus Linux enables you to fully automate
+  your datacenter infrastructure.
+
+  You only need three things to get started
+      \begin{itemize}
+        \item Ansible \item Cumulus Linux \item A supported network switch
+      \end{itemize}
+
+  As you all know Ansible by now, I'll talk about Cumulus Linux and the
+  appropiate hardware. Ansible is "only" the tool to keep it all together.
+
+\end{frame}
+
+\section{Cumulus Linux Overview}
+
+\begin{frame}[fragile]
+  \frametitle{What is Cumulus Linux?}
+
+Cumulus Linux 
+      \begin{itemize}
+		\item is a generic Switch Operating System like IOS (Cisco), JunOS (Juniper) and others
+		\item runs on industry standard hardware
+		\item is based on Debian
+      \end{itemize}
+
+Basically like a Linux server with many hardware-accelerated Ethernet ports
+provided by the high-performance switch silicon.
+
+It provides bash, iproute2 and other well-known tools.
+
+Licensed on a per instance basis with a very simple licensing model. Switches continue working after the license expires.
+Everything is kept on-site, no third party services are needed to use the switch with Cumulus Linux.
+
+\end{frame}
+
+\section{Network Hardware}
+
+\begin{frame}[fragile]
+  \frametitle{Where can I use it?}
+  
+Cumulus Linux supports many 1G, 10G and 40G switches.
+Each switch is based on Broadcom Firebolt, Triumph, Apollo and Trident silicon.
+
+DELL and Quanta are probably the most well-known vendors, but also Penguin Computing,
+Agema and Edge-corE are in the list.
+
+The complete HCL is available at
+\url{cumulusnetworks.com/support/linux-hardware-compatibility-list/}
+\end{frame}
+
+\section{How does it work?}
+
+\begin{frame}[fragile]
+  \frametitle{How does it work?}
+
+ONIE (Open Network Installation Environment) is Bootloader which is iPXE on steroids.
+It was created by Cumulus Linux in 2012 and is part of the Open Compute Project since 2013.
+
+It supports auto-discovery of installation servers by DHCP and HTTP, as well automatic image installation
+and provisioning.
+Other uses are diagnostics and rescue \& recovery.
+
+More info can be found at \url{opencomputeproject.github.io/onie/docs/index.html}
+\end{frame}
+
+\section{Topology}
+
+\begin{frame}[fragile]
+  \frametitle{What does our topology look like?}
+
+For the demo we have two switches available. Those are DELL S6000-ON with 32 x 40G-QSFP+ ports.
+
+We're going to
+
+      \begin{itemize}
+        \item install the switches via Zero Touch Provisioning in the lab
+        \item run a playbook to configure the Prescriptive Topology Manager
+        \item setup iBGP between the switches
+       \end{itemize}
+
+\begin{center}
+  \includegraphics[scale=0.5]{ibgp-test}
+\end{center}
+
+\end{frame}
+
+\section{Demo}
+
+\begin{frame}{Super fancy demo}
+  \begin{figure}
+    \begin{tikzpicture}
+      \begin{axis}[
+        mlineplot,
+        width=0.9\textwidth,
+        height=6cm,
+      ]
+
+        \addplot {sin(deg(x))};
+        \addplot+[samples=50] {sin(deg(4*x))};
+
+      \end{axis}
+    \end{tikzpicture}
+  \end{figure}
+\end{frame}
+
+\plain{Questions?}
+
+\begin{frame}{Summary}
+
+  Get the playbooks I used and the slides at
+
+  \begin{center}\url{github.com/eimann/ansible-cl-dus}\end{center}
+
+  This presentation is licensed under
+  \href{http://creativecommons.org/licenses/by-sa/4.0/}{Creative Commons
+  Attribution-ShareAlike 4.0 International License}.
+
+  \begin{center}\ccbysa\end{center}
+  
+  Proudly made with \href{https://github.com/matze/mtheme}{mtheme} and \LaTeX{}! 
+
+\end{frame}
+
+\end{document}
