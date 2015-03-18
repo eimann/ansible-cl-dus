@@ -1,0 +1,13 @@
+*.swp
+*.ropeproject
+*MANIFEST
+*deb_dist
+*dist
+*.gz
+*.pyc
+*.swo
+*.txt
+/.temp_mods
+tests/write_to_ports_conf
+Session.vim
+ansible.cfg
